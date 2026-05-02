@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono&display=swap');
+
+:root {
+    --paper: oklch(0.975 0.012 80);
+    --ink: oklch(0.16 0.01 60);
+    --ember: oklch(0.62 0.22 27);
+    --border: oklch(0.16 0.01 60 / 0.1);
+}
+
+body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4rem;
+}
+
+/* Navbar Fix */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 0;
+}
+
+.logo-group { display: flex; align-items: center; gap: 12px; }
+.logo-dot { width: 20px; height: 20px; background: var(--ember); border-radius: 50%; }
+.logo-text { font-family: "Instrument Serif"; font-size: 1.6rem; }
+
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { text-decoration: none; color: var(--ink); font-size: 0.9rem; opacity: 0.6; }
+.nav-links a.active { opacity: 1; font-weight: 600; background: var(--ink); color: var(--paper); padding: 8px 16px; border-radius: 20px; }
+
+/* Hero Split Layout */
+.hero-split {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 100px;
+    padding: 8rem 0;
+    align-items: start;
+}
+
+.main-title {
+    font-family: "Instrument Serif", serif;
+    font-size: 7.5rem;
+    line-height: 0.8;
+    margin: 0;
+    letter-spacing: -0.04em;
+}
+
+.italic-ember { font-style: italic; color: var(--ember); }
+
+.hero-description {
+    margin-top: 4rem;
+    max-width: 450px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+/* Links Grid */
+.footer-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.link-col h4 { font-family: "Geist Mono"; font-size: 0.7rem; opacity: 0.4; margin-bottom: 2rem; }
+.link-col a { display: block; text-decoration: none; color: var(--ink); margin-bottom: 0.8rem; font-size: 1.1rem; }
+
+/* Massive Logo Branding */
+.massive-logo {
+    font-family: "Instrument Serif", serif;
+    font-size: 24rem;
+    line-height: 0.8;
+    margin-top: 2rem;
+    letter-spacing: -0.05em;
+    position: relative;
+    padding-bottom: 4rem;
+}
+
+.massive-logo::after {
+    content: "●";
+    color: var(--ember);
+    font-size: 4rem;
+    position: absolute;
+    bottom: 8rem;
+    right: -2rem;
+}
+
+/* System Footer */
+.system-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 0;
+    border-top: 1px solid var(--border);
+    font-family: "Geist Mono";
+    font-size: 0.75rem;
+    opacity: 0.4;
+}
+
+.status-dot { color: var(--ember); }
+
+/* Floating Nav Specifics */
+.nav-glass {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.nav-item {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item:active {
+    transform: scale(0.92);
+}
+
+/* Tooltip style for Legal links */
+.legal-trigger:hover .legal-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+@keyframes nav-slide-up {
+    from { transform: translate(-50%, 100px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.animate-nav {
+    animation: nav-slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@media (max-width: 768px) {
+  /* Increase font size for better legibility on small screens */
+  .font-display {
+    font-size: clamp(2.5rem, 8vw, 4rem) !important;
+  }
+  
+  /* Make the code input slightly smaller so it doesn't overflow */
+  .code-input {
+    font-size: 5rem !important;
+  }
+
+  /* Expand the surface to fill more width on mobile */
+  .surface {
+    border-radius: 1rem;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+
+  /* Hide the side rail (network stats) on mobile to keep focus on the composer */
+  aside {
+    display: none;
+  }
+}
+
+/* Prevent iOS zoom on input focus */
+@media screen and (max-width: 768px) {
+  input[type="text"], 
+  input[type="number"], 
+  textarea {
+    font-size: 16px !important;
+  }
+  
+  /* Ensure the floating nav doesn't overlap content */
+  body {
+    padding-bottom: 100px;
+  }
+
+  /* Make buttons feel more tactile */
+  button:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Hide desktop sidebars on small screens to keep flow clean */
+@media (max-width: 1024px) {
+  aside {
+    display: none;
+  }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service — Vraxis Drop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">vraxisdrop</div>
+        <div class="nav-links">
+            <a href="/">Drop</a>
+            <a href="/about">About</a>
+        </div>
+    </nav>
+
+    <main class="legal-container" style="max-width: 800px; margin: 60px auto; padding: 0 20px; line-height: 1.8;">
+        <h1 style="font-size: 3rem; font-weight: 900; margin-bottom: 40px;">Terms of <span style="color: var(--accent);">Service</span></h1>
+        <p style="color: #666; margin-bottom: 40px;">Effective Date: May 2, 2026</p>
+
+        <section style="margin-bottom: 40px;">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or using Vraxis Drop, you agree to be bound by these Terms of Service. If you do not agree to these terms, you are prohibited from using the service.</p>
+        </section>
+
+        <section style="margin-bottom: 40px;">
+            <h2>2. Permitted Use</h2>
+            <p>Vraxis Drop is provided for the temporary transfer of non-sensitive, lawful information. You agree not to use the service for:
+                <ul style="margin-top: 10px;">
+                    <li>Distribution of illegal, harmful, or predatory content.</li>
+                    <li>Violation of any local, national, or international laws.</li>
+                    <li>Attempting to circumvent the Service’s security or TTL protocols.</li>
+                </ul>
+            </p>
+        </section>
+
+        <section style="margin-bottom: 40px;">
+            <h2>3. No Warranty & Limitation of Liability</h2>
+            <p>The Service is provided "as is" without any warranties of any kind. Vraxis Drop and its developers shall not be liable for any data loss, intercepted matter, or damages resulting from the use of this ephemeral utility. Because data is purged automatically, there is no way to retrieve lost or expired drops.</p>
+        </section>
+
+        <section style="margin-bottom: 40px;">
+            <h2>4. Service Modifications</h2>
+            <p>We reserve the right to modify or discontinue the service at any time without notice. We may adjust the default TTL (Time-To-Live) settings based on network load or system maintenance needs.</p>
+        </section>
+
+        <section style="margin-bottom: 40px;">
+            <h2>5. Governing Law</h2>
+            <p>These terms are governed by the laws of the Republic of South Africa. Any disputes shall be handled within the jurisdiction of the North West province.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-meta" style="border-top: 1px solid #e0deda; padding-top: 20px;">
+            <span>© 2026 Vraxis — Operating from Potchefstroom</span>
+        </div>
+    </footer>
+
+    <!-- FLOATING NAVIGATION BAR -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-nav">
+    <nav class="nav-glass flex items-center gap-1 p-1.5 rounded-full">
+        
+        <!-- Main Actions -->
+        <a href="/" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full bg-black text-white">
+            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold">Drop</span>
+        </a>
+
+        <a href="/retrieve" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="download" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Retrieve</span>
+        </a>
+
+        <a href="/activity" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Activity</span>
+        </a>
+
+        <a href="/journal" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Journal</span>
+        </a>
+
+        <!-- Legal/Info Flyout -->
+        <div class="relative legal-trigger">
+            <button class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+                <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">More</span>
+            </button>
+            
+            <!-- Hidden Legal Menu (Appears on Hover) -->
+            <div class="legal-menu absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-48 bg-white border border-black/5 rounded-2xl p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none transition-all duration-300">
+                <a href="/about" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">About Us</a>
+                <a href="/privacy" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Privacy Policy</a>
+                <a href="/terms" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Terms & Con</a>
+                <div class="border-t border-black/5 my-1"></div>
+                <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
+            </div>
+        </div>
+
+    </nav>
+</div>
+
+<!-- Lucide Icon Initialization -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+
+    // Logic to highlight active link
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('.nav-item').forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('bg-black', 'text-white');
+            link.classList.remove('text-black/40', 'hover:bg-black/5');
+        }
+    });
+</script>
+</body>
+</html>

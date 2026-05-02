@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Retrieve — VRAXIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --paper: oklch(0.975 0.012 80); --ink: oklch(0.16 0.01 60); --ember: oklch(0.62 0.22 27); --border: oklch(0.16 0.01 60 / 0.1); }
+        body { background-color: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .font-display { font-family: 'Instrument Serif', serif; }
+        .italic-serif { font-family: 'Instrument Serif', serif; font-style: italic; }
+        .surface { background: white; border: 1px solid var(--border); border-radius: 1.5rem; }
+        
+        /* Mobile-optimized code input */
+        .code-input { 
+            background: transparent; 
+            border: none; 
+            outline: none; 
+            font-family: 'Instrument Serif', serif; 
+            font-size: clamp(5rem, 20vw, 8rem); 
+            letter-spacing: 0.1em; 
+            text-align: center; 
+            width: 100%; 
+            color: var(--ink);
+        }
+        
+        /* Hide arrows on number input */
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+        .nav-glass { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(0, 0, 0, 0.08); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); }
+        
+        @media (max-width: 768px) {
+            .surface-mobile { border-radius: 2rem 2rem 0 0; border-bottom: none; }
+        }
+    </style>
+</head>
+<body class="selection:bg-[var(--ember)] pb-32">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 py-8 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-[var(--ember)] rounded-full"></div>
+            <span class="font-display text-2xl">vraxisdrop</span>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 lg:px-10 pt-8 md:pt-24 flex flex-col items-center">
+        <header class="text-center mb-12 md:mb-16">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 border border-black/5 font-mono text-[10px] uppercase tracking-widest opacity-60">Matter Pickup</span>
+            <h1 class="mt-4 font-display text-6xl md:text-8xl leading-none">Pick up your <span class="italic-serif text-[var(--ember)]">drop.</span></h1>
+        </header>
+
+        <section class="max-w-xl mx-auto w-full">
+            <!-- INPUT CARD -->
+            <div id="input-card" class="surface p-10 md:p-20 text-center shadow-sm">
+                <!-- inputmode="numeric" forces number pad on mobile -->
+                <input 
+                    type="text" 
+                    id="access-code" 
+                    placeholder="0000" 
+                    maxlength="4" 
+                    inputmode="numeric" 
+                    pattern="[0-9]*"
+                    class="code-input" 
+                    autofocus
+                >
+                
+                <div class="mt-10">
+                    <!-- Large touch target (56px height) for mobile ergonomics -->
+                    <button onclick="handleRetrieve()" class="w-full group inline-flex items-center justify-center gap-2 px-10 py-5 bg-black text-white rounded-2xl font-bold transition-all active:scale-95 hover:bg-ember">
+                        Retrieve Matter <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- RESULT AREA (Hidden by default) -->
+            <div id="result-container" class="mt-4 hidden animate-rise">
+                <div class="surface p-8 md:p-10 bg-white border-2 border-[var(--ember)]">
+                    <div class="flex items-center justify-between mb-4">
+                         <span class="font-mono text-[10px] uppercase tracking-widest text-[var(--ember)]">Decrypted Matter</span>
+                         <button onclick="copyToClipboard()" class="p-2 opacity-40 hover:opacity-100">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                         </button>
+                    </div>
+                    <pre id="matter-text" class="font-sans text-xl md:text-2xl leading-relaxed whitespace-pre-wrap break-words text-[var(--ink)]"></pre>
+                </div>
+                <div class="mt-6 text-center text-[10px] font-mono uppercase tracking-widest opacity-40">
+                    <i data-lucide="zap" class="w-3 h-3 inline mr-1 text-[var(--ember)]"></i> Matter has been purged from the node.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FLOATING NAVIGATION BAR -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-nav">
+    <nav class="nav-glass flex items-center gap-1 p-1.5 rounded-full">
+        
+        <!-- Main Actions -->
+        <a href="/" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full bg-black text-white">
+            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold">Drop</span>
+        </a>
+
+        <a href="/retrieve" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="download" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Retrieve</span>
+        </a>
+
+        <a href="/activity" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Activity</span>
+        </a>
+
+        <a href="/journal" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Journal</span>
+        </a>
+
+        <!-- Legal/Info Flyout -->
+        <div class="relative legal-trigger">
+            <button class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+                <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">More</span>
+            </button>
+            
+            <!-- Hidden Legal Menu (Appears on Hover) -->
+            <div class="legal-menu absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-48 bg-white border border-black/5 rounded-2xl p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none transition-all duration-300">
+                <a href="/about" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">About Us</a>
+                <a href="/privacy" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Privacy Policy</a>
+                <a href="/terms" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Terms & Con</a>
+                <div class="border-t border-black/5 my-1"></div>
+                <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
+            </div>
+        </div>
+
+    </nav>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        async function handleRetrieve() {
+            const codeInput = document.getElementById('access-code');
+            const code = codeInput.value;
+            
+            if (code.length < 4) return;
+
+            const response = await fetch(`/api/pickup/${code}`);
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('matter-text').textContent = data.content;
+                document.getElementById('result-container').classList.remove('hidden');
+                document.getElementById('input-card').classList.add('hidden');
+            } else {
+                // Tactical vibration/shake for mobile error feedback
+                codeInput.classList.add('animate-shake');
+                setTimeout(() => codeInput.classList.remove('animate-shake'), 500);
+                alert("Matter expired or code invalid.");
+            }
+        }
+
+        function copyToClipboard() {
+            const text = document.getElementById('matter-text').textContent;
+            navigator.clipboard.writeText(text);
+            // Subtle feedback
+            const btn = document.querySelector('[onclick="copyToClipboard()"]');
+            btn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-green-600"></i>';
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>

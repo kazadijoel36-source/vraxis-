@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Journal — VRAXIS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --paper: oklch(0.975 0.012 80);
+        --ink: oklch(0.16 0.01 60);
+        --ember: oklch(0.62 0.22 27);
+        --border: oklch(0.16 0.01 60 / 0.1);
+      }
+      body { background-color: var(--paper); color: var(--ink); font-family: "Inter", sans-serif; }
+      .font-display { font-family: "Instrument Serif", serif; }
+      .italic-serif { font-family: "Instrument Serif", serif; font-style: italic; }
+      .surface { background: white; border: 1px solid var(--border); border-radius: 1.5rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+      .surface:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(20, 14, 8, 0.08); }
+      .nav-glass { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); border: 1px solid rgba(0, 0, 0, 0.08); }
+      
+      @keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      .animate-rise { animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    </style>
+  </head>
+  <body class="selection:bg-[var(--ember)] selection:text-white pb-32">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 py-8 flex justify-between items-center animate-rise">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-[var(--ember)] rounded-full"></div>
+        <span class="font-display text-2xl">vraxisdrop</span>
+      </div>
+      <div class="hidden md:flex gap-8 text-sm font-medium opacity-60">
+        <a href="/">Drop</a>
+        <a href="/retrieve">Retrieve</a>
+        <a href="/activity">Activity</a>
+        <a href="/journal" class="opacity-100">Journal</a>
+        <a href="/about">About</a>
+      </div>
+      <button class="text-sm font-mono uppercase tracking-tighter" onclick="location.href='/'">New drop ↗</button>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 lg:px-10 pt-16 md:pt-24 pb-24">
+      <header class="animate-rise">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 border border-black/5 font-mono text-[10px] uppercase tracking-widest opacity-60">Field Notes</span>
+        <h1 class="mt-6 font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.85] tracking-tight">
+          Privacy is a<br /><span class="italic-serif text-[var(--ember)]">quiet decision.</span>
+        </h1>
+        <p class="mt-8 max-w-xl text-lg opacity-60">
+          The VRAXIS Journal tracks our move toward a Zero-Persistence Web. Long-form essays on why we built an accountless empire from the ZA-01 node.
+        </p>
+      </header>
+
+      <!-- FEATURED POST: THE CASE FOR THE ACCOUNTLESS WEB -->
+      <article class="mt-20 grid lg:grid-cols-12 gap-0 surface overflow-hidden group animate-rise" style="animation-delay: 0.1s">
+        <div class="lg:col-span-5 bg-[var(--ink)] relative overflow-hidden h-[400px] lg:h-auto">
+          <div class="absolute inset-0 bg-gradient-to-br from-[var(--ember)] to-transparent opacity-40 group-hover:scale-110 transition-transform duration-700"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="font-display text-white text-7xl italic-serif opacity-20 group-hover:opacity-100 transition-opacity">vanish.</span>
+          </div>
+        </div>
+        <div class="lg:col-span-7 p-8 md:p-16 flex flex-col justify-center">
+          <div class="font-mono text-[10px] uppercase tracking-widest opacity-40">Field Note 01 · May 2, 2026 · 8 min</div>
+          <h2 class="mt-6 font-display text-4xl md:text-5xl leading-tight group-hover:text-[var(--ember)] transition-colors">
+            The Case for the Accountless Web.
+          </h2>
+          <p class="mt-6 text-lg opacity-60 leading-relaxed">
+            Identity is a liability. Explore why VRAXIS chose to kill the login screen in favor of immediate, frictionless utility and total anonymity.
+          </p>
+          <a href="/journal/the-case-for-the-accountless-web" class="mt-10 flex items-center gap-2 font-medium group">
+            Read manifesto
+            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+          </a>
+        </div>
+      </article>
+
+      <!-- SECONDARY GRID -->
+      <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="surface p-8 group animate-rise" style="animation-delay: 0.2s">
+            <div class="font-mono text-[10px] uppercase tracking-widest opacity-40">Infrastructure</div>
+            <h3 class="mt-4 font-display text-3xl leading-tight group-hover:text-[var(--ember)] transition-colors">ZA-01: Potchefstroom Node</h3>
+            <p class="mt-4 text-sm opacity-60">Self-hosting from the North West. Why local infrastructure is the key to global privacy.</p>
+            <div class="mt-8 flex items-center justify-between">
+                <span class="text-[10px] font-mono opacity-40""Read Entry"[cite: 2]./span>
+                <i data-lucide="lock" class="w-3 h-3 opacity-20"></i>
+                <a href="/journal/za-01-potchefstroom-node" class="mt-10 flex items-center gap-2 font-medium group">
+            Read manifesto
+            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+          </a>
+            </div>
+        </article>
+
+        <article class="surface p-8 group animate-rise" style="animation-delay: 0.3s">
+            <div class="font-mono text-[10px] uppercase tracking-widest opacity-40">Engineering</div>
+            <h3 class="mt-4 font-display text-3xl leading-tight group-hover:text-[var(--ember)] transition-colors">The Ember Protocol</h3>
+            <p class="mt-4 text-sm opacity-60">How we ensure data is physically purged from memory the second it is retrieved.</p>
+            <div class="mt-8 flex items-center justify-between">
+                <span class="text-[10px] font-mono opacity-40""Read Entry"[cite: 2]./span>
+                <i data-lucide="lock" class="w-3 h-3 opacity-20"></i>
+                 <a href="/journal/the-ember-protocol" class="mt-10 flex items-center gap-2 font-medium group">
+            Read manifesto
+            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+          </a>
+            </div>
+        </article>
+
+        <article class="surface p-8 group animate-rise" style="animation-delay: 0.4s">
+            <div class="font-mono text-[10px] uppercase tracking-widest opacity-40">Design</div>
+            <h3 class="mt-4 font-display text-3xl leading-tight group-hover:text-[var(--ember)] transition-colors">Calm over Conversion</h3>
+            <p class="mt-4 text-sm opacity-60">Why our UI doesn't use dark patterns or notification pings to keep you hooked.</p>
+            <div class="mt-8 flex items-center justify-between">
+                <span class="text-[10px] font-mono opacity-40">coming soon.</span>
+                <i data-lucide="lock" class="w-3 h-3 opacity-20"></i>
+            </div>
+        </article>
+      </div>
+
+      <!-- NEWSLETTER -->
+      <section class="mt-24 py-20 px-8 surface bg-black text-[var(--paper)] text-center animate-rise">
+        <h2 class="font-display text-4xl md:text-5xl italic-serif">Stay in the quiet.</h2>
+        <p class="mt-4 opacity-60 max-w-md mx-auto">One thoughtful transmission every two weeks. No trackers, just the truth about privacy.</p>
+        <form class="mt-10 flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+          <input type="email" placeholder="you@somewhere.com" class="flex-1 px-6 py-4 rounded-full bg-white/5 border border-white/10 focus:outline-none focus:border-[var(--ember)] text-sm" />
+          <button class="px-8 py-4 bg-[var(--ember)] text-white rounded-full font-bold text-sm hover:scale-105 transition-transform">Subscribe</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="py-12 border-t border-black/5 text-center opacity-40 font-mono text-[10px] uppercase tracking-widest">
+      ZA-01 Node · Potchefstroom · v1.0.4
+    </footer>
+
+     <!-- FLOATING NAVIGATION BAR -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-nav">
+    <nav class="nav-glass flex items-center gap-1 p-1.5 rounded-full">
+        
+        <!-- Main Actions -->
+        <a href="/" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full bg-black text-white">
+            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold">Drop</span>
+        </a>
+
+        <a href="/retrieve" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="download" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Retrieve</span>
+        </a>
+
+        <a href="/activity" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Activity</span>
+        </a>
+
+        <a href="/journal" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Journal</span>
+        </a>
+
+        <!-- Legal/Info Flyout -->
+        <div class="relative legal-trigger">
+            <button class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+                <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">More</span>
+            </button>
+            
+            <!-- Hidden Legal Menu (Appears on Hover) -->
+            <div class="legal-menu absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-48 bg-white border border-black/5 rounded-2xl p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none transition-all duration-300">
+                <a href="/about" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">About Us</a>
+                <a href="/privacy" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Privacy Policy</a>
+                <a href="/terms" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Terms & Con</a>
+                <div class="border-t border-black/5 my-1"></div>
+                <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
+            </div>
+        </div>
+
+    </nav>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+      const currentPath = window.location.pathname;
+      document.querySelectorAll(".nav-item").forEach((link) => {
+        if (link.getAttribute("href") === currentPath) {
+          link.classList.add("bg-black", "text-white");
+          link.classList.remove("text-black/40", "hover:bg-black/5");
+        }
+      });
+    </script>
+  </body>
+</html>

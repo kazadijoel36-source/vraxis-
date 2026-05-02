@@ -1,0 +1,100 @@
+<!-- Use the same boilerplate as journal_01.html -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Case for the Accountless Web — VRAXIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: oklch(0.975 0.012 80);
+        --ink: oklch(0.16 0.01 60);
+        --ember: oklch(0.62 0.22 27);
+        --border: oklch(0.16 0.01 60 / 0.1);
+      }
+      body {
+        background-color: var(--paper);
+        color: var(--ink);
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+      }
+      .font-display {
+        font-family: "Instrument Serif", serif;
+      }
+      .italic-serif {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+      }
+      .prose p {
+        margin-bottom: 1.5rem;
+        opacity: 0.9;
+        font-size: 1.125rem;
+      }
+      .prose h2 {
+        font-family: "Instrument Serif", serif;
+        font-size: 2.5rem;
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        line-height: 1.1;
+      }
+      .nav-glass {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+    </style>
+  </head>
+  <body class="selection:bg-[var(--ember)] selection:text-white pb-32">
+    <nav
+      class="max-w-7xl mx-auto px-6 lg:px-10 py-8 flex justify-between items-center"
+    >
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-[var(--ember)] rounded-full"></div>
+        <span class="font-display text-2xl">vraxisdrop</span>
+      </div>
+    </nav>
+    <main class="max-w-3xl mx-auto px-6 pt-20">
+      <header class="mb-16">
+        <span
+          class="font-mono text-[10px] uppercase tracking-widest px-2 py-1 bg-black/5 rounded"
+          >Field Note 02</span
+        >
+        <h1
+          class="font-display text-6xl md:text-8xl leading-[0.9] tracking-tight"
+        >
+          ZA-01: The
+          <span class="italic-serif text-[var(--ember)]">Potch</span> Node.
+        </h1>
+      </header>
+
+      <article class="prose">
+        <p>
+          The "Cloud" is just a marketing term for someone else's computer. For
+          VRAXIS to be truly ephemeral, we had to move away from centralized
+          third-party servers and build our own local infrastructure.
+        </p>
+
+        <h2>Local Sovereignty</h2>
+        <p>
+          Operating the ZA-01 node from <strong>Potchefstroom</strong> allows us
+          to maintain a "Zero-Log" routing environment. Most global hosting
+          providers log traffic at the hardware level before it even touches our
+          code. By self-hosting our primary node in the North West, we ensure
+          that your data never touches a corporate logger.
+        </p>
+
+        <p>
+          Our current benchmarks show a 38ms average latency across the network,
+          proving that privacy doesn't have to be slow[cite: 2].
+        </p>
+      </article>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Case for the Accountless Web — VRAXIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: oklch(0.975 0.012 80);
+        --ink: oklch(0.16 0.01 60);
+        --ember: oklch(0.62 0.22 27);
+        --border: oklch(0.16 0.01 60 / 0.1);
+      }
+      body {
+        background-color: var(--paper);
+        color: var(--ink);
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+      }
+      .font-display {
+        font-family: "Instrument Serif", serif;
+      }
+      .italic-serif {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+      }
+      .prose p {
+        margin-bottom: 1.5rem;
+        opacity: 0.9;
+        font-size: 1.125rem;
+      }
+      .prose h2 {
+        font-family: "Instrument Serif", serif;
+        font-size: 2.5rem;
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        line-height: 1.1;
+      }
+      .nav-glass {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+    </style>
+  </head>
+  <body class="selection:bg-[var(--ember)] selection:text-white pb-32">
+    <nav
+      class="max-w-7xl mx-auto px-6 lg:px-10 py-8 flex justify-between items-center"
+    >
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-[var(--ember)] rounded-full"></div>
+        <span class="font-display text-2xl">vraxisdrop</span>
+      </div>
+    </nav>
+    <main class="max-w-3xl mx-auto px-6 pt-20">
+      <header class="mb-16">
+        <span
+          class="font-mono text-[10px] uppercase tracking-widest px-2 py-1 bg-black/5 rounded"
+          >Field Note 03</span
+        >
+        <h1
+          class="font-display text-6xl md:text-8xl leading-[0.9] tracking-tight"
+        >
+          The
+          <span class="italic-serif text-[var(--ember)]">Ember</span> Protocol.
+        </h1>
+      </header>
+
+      <article class="prose">
+        <p>
+          Most "Delete" buttons are an illusion. They simply flip a "hidden"
+          flag in a database, keeping the actual data stored on a disk
+          indefinitely. The <strong>Ember Protocol</strong> is our technical
+          commitment to actual destruction[cite: 3].
+        </p>
+
+        <h2>Physical Purging</h2>
+        <p>
+          When you retrieve a drop on VRAXIS, we trigger an immediate
+          <code>db.session.delete()</code> command[cite: 3]. This isn't a "soft
+          delete." It is a command to the database engine to unlink and
+          overwrite that specific sector of memory[cite: 3].
+        </p>
+
+        <p>
+          Once the 4-digit code is used, the matter is gone. Not just
+          hidden—erased[cite: 3].
+        </p>
+      </article>
+    </main>
+  </body>
+</html>

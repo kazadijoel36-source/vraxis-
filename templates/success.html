@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drop Secured — Vraxis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="animate-fade">
+    <nav class="navbar">
+        <div class="logo">vraxisdrop</div>
+    </nav>
+
+    <main class="main-container" style="text-align: center;">
+        <div class="pill">● SECURED & ENCRYPTED</div>
+        <h1 class="font-display" style="margin: 2rem 0;">Your matter is ready for <span class="text-ember">pickup.</span></h1>
+        
+        <div class="surface shadow-ember animate-rise" style="display: inline-block; padding: 3rem;">
+            <img src="{{ url_for('generate_qr', code=code) }}" style="width: 200px; border-radius: 12px;">
+            <div style="margin-top: 2rem;">
+                <label class="pill">ACCESS CODE</label>
+                <div class="font-mono" style="font-size: 3rem; font-weight: 800; letter-spacing: 12px; margin-top: 10px;">{{ code }}</div>
+            </div>
+        </div>
+
+        <p style="margin-top: 3rem; color: var(--muted-foreground); max-width: 400px; margin-left: auto; margin-right: auto;">
+            Matter will self-destruct once retrieved or after the expiration window. Send anything. Leave nothing.
+        </p>
+        
+        <button onclick="location.href='/'" class="bg-ink text-paper" style="margin-top: 2rem; padding: 12px 32px; border-radius: 999px; cursor: pointer;">Done</button>
+    </main>
+
+     <!-- FLOATING NAVIGATION BAR -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-nav">
+    <nav class="nav-glass flex items-center gap-1 p-1.5 rounded-full">
+        
+        <!-- Main Actions -->
+        <a href="/" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full bg-black text-white">
+            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold">Drop</span>
+        </a>
+
+        <a href="/retrieve" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="download" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Retrieve</span>
+        </a>
+
+        <a href="/activity" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Activity</span>
+        </a>
+
+        <a href="/journal" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Journal</span>
+        </a>
+
+        <!-- Legal/Info Flyout -->
+        <div class="relative legal-trigger">
+            <button class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+                <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">More</span>
+            </button>
+            
+            <!-- Hidden Legal Menu (Appears on Hover) -->
+            <div class="legal-menu absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-48 bg-white border border-black/5 rounded-2xl p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none transition-all duration-300">
+                <a href="/about" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">About Us</a>
+                <a href="/privacy" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Privacy Policy</a>
+                <a href="/terms" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Terms & Con</a>
+                <div class="border-t border-black/5 my-1"></div>
+                <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
+            </div>
+        </div>
+
+    </nav>
+</div>
+
+<!-- Lucide Icon Initialization -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+
+    // Logic to highlight active link
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('.nav-item').forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('bg-black', 'text-white');
+            link.classList.remove('text-black/40', 'hover:bg-black/5');
+        }
+    });
+</script>
+</body>
+</html>

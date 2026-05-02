@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRAXIS — Send anything. Leave nothing.</title>
+    <!-- Tailwind CSS & Lucide Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --paper: oklch(0.975 0.012 80);
+        --ink: oklch(0.16 0.01 60);
+        --ember: oklch(0.62 0.22 27);
+        --border: oklch(0.16 0.01 60 / 0.1);
+      }
+      body {
+        background-color: var(--paper);
+        color: var(--ink);
+        font-family: "Inter", sans-serif;
+      }
+      .font-display {
+        font-family: "Instrument Serif", serif;
+      }
+      .font-mono {
+        font-family: "Geist Mono", monospace;
+      }
+      .italic-serif {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+      }
+      .text-ember {
+        color: var(--ember);
+      }
+      .bg-ember {
+        background-color: var(--ember);
+      }
+      .surface {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 1.5rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.3rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border);
+        font-family: "Geist Mono";
+        font-size: 0.7rem;
+        text-transform: uppercase;
+      }
+
+      .nav-glass {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      }
+
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-rise {
+        animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+    </style>
+</head>
+<body class="selection:bg-[var(--ember)] selection:text-white pb-32">
+    <!-- TOP NAV -->
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 py-8 flex justify-between items-center animate-rise">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-ember rounded-full"></div>
+        <span class="font-display text-2xl">vraxisdrop</span>
+      </div>
+      <div class="hidden md:flex gap-8 text-sm font-medium opacity-60">
+        <a href="/" class="opacity-100">Drop</a>
+        <a href="/retrieve">Retrieve</a>
+        <a href="/activity">Activity</a>
+        <a href="/journal">Journal</a>
+        <a href="/about">About</a>
+      </div>
+      <button class="text-sm font-mono uppercase tracking-tighter" onclick="location.href='/'">
+        New drop ↗
+      </button>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <!-- HERO -->
+      <section class="pt-16 md:pt-24 pb-12 md:pb-20">
+        <div class="animate-rise">
+          <span class="pill">
+            <span class="w-1.5 h-1.5 rounded-full bg-ember animate-pulse"></span>
+            Now in private beta
+          </span>
+        </div>
+        <h1 class="mt-6 font-display text-[clamp(3rem,9vw,8rem)] leading-[0.9] animate-rise" style="animation-delay: 0.1s">
+          Send anything.<br />
+          <span class="italic-serif text-ember">Leave nothing.</span>
+        </h1>
+        <p class="mt-8 max-w-xl text-lg opacity-60 animate-rise" style="animation-delay: 0.2s">
+          Vraxis Drop is a quiet, ephemeral channel between your devices and the people you trust. Drop a payload, share a code or QR, and watch it vanish on its own terms.
+        </p>
+      </section>
+
+      <!-- AD SLOT -->
+      <div class="mb-12 border-dashed border border-black/10 h-[90px] flex items-center justify-center font-mono text-[10px] opacity-30">
+        SPONSORED — 728 × 90
+      </div>
+
+     <!-- Inside index.html - replace the main composer section -->
+<section class="lg:col-span-8 surface shadow-sm overflow-hidden animate-rise flex flex-col h-full">
+    <form action="/drop" method="POST" class="flex flex-col h-full">
+        <!-- Header stays at top -->
+        <div class="px-6 py-4 border-b border-black/5 flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-ember animate-pulse"></div>
+                <span class="font-mono text-[10px] uppercase tracking-widest opacity-40">Composing drop</span>
+            </div>
+            <div id="char-count" class="font-mono text-[10px] opacity-40">0 chars</div>
+        </div>
+
+        <!-- Textarea expands to fill space but respects bottom actions -->
+        <div class="p-6 md:p-10 flex flex-col flex-1">
+            <textarea
+                name="content"
+                id="payload"
+                placeholder="Type, paste, dictate…"
+                class="w-full flex-1 min-h-[200px] bg-transparent border-0 font-display text-2xl md:text-3xl focus:outline-none resize-none leading-snug"
+                required
+            ></textarea>
+
+            <!-- THUMB ZONE: Expiry and Button moved closer together -->
+            <div class="mt-auto pt-6">
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <!-- Larger Touch Targets for Radio Buttons (44px min height) -->
+                    <label class="flex-1 min-w-[80px]">
+                        <input type="radio" name="expiry" value="1h" class="hidden peer">
+                        <div class="peer-checked:bg-black peer-checked:text-white border border-black/10 rounded-xl py-3 text-center text-[10px] font-mono uppercase transition-all active:scale-95">1H</div>
+                    </label>
+                    <label class="flex-1 min-w-[80px]">
+                        <input type="radio" name="expiry" value="24h" class="hidden peer" checked>
+                        <div class="peer-checked:bg-black peer-checked:text-white border border-black/10 rounded-xl py-3 text-center text-[10px] font-mono uppercase transition-all active:scale-95">24H</div>
+                    </label>
+                    <label class="flex-1 min-w-[80px]">
+                        <input type="radio" name="expiry" value="7d" class="hidden peer">
+                        <div class="peer-checked:bg-black peer-checked:text-white border border-black/10 rounded-xl py-3 text-center text-[10px] font-mono uppercase transition-all active:scale-95">7D</div>
+                    </label>
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full group flex items-center justify-center gap-2 px-8 py-5 bg-black text-white rounded-2xl font-medium transition-all active:scale-95 shadow-lg"
+                >
+                    Release drop
+                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </button>
+                <p class="text-center text-[9px] font-mono opacity-30 mt-4 uppercase tracking-widest">
+                    ZA-01 Node · Encrypted Connection
+                </p>
+            </div>
+        </div>
+    </form>
+</section>
+
+        <!-- SIDEBAR -->
+        <aside class="lg:col-span-4 space-y-6 animate-rise" style="animation-delay: 0.4s">
+          <a href="/retrieve" class="group block surface p-6 hover:shadow-md transition-all">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[10px] uppercase tracking-widest opacity-40">Have a code?</span>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+            </div>
+            <div class="font-display text-3xl mt-3">
+              Retrieve a <span class="italic-serif text-ember">drop</span>[cite: 2]
+            </div>
+          </a>
+
+          <div class="surface p-6">
+            <span class="font-mono text-[10px] uppercase tracking-widest opacity-40">Live network</span>
+            <div class="mt-4 grid grid-cols-2 gap-4">
+              <div>
+                <div class="font-display text-2xl">12,481</div>
+                <div class="text-[10px] opacity-40 uppercase">Drops today</div>
+              </div>
+              <div>
+                <div class="font-display text-2xl">38 ms</div>
+                <div class="text-[10px] opacity-40 uppercase">Avg latency</div>
+              </div>
+              <div>
+                <div class="font-display text-2xl">7</div>
+                <div class="text-[10px] opacity-40 uppercase">Active nodes</div>
+              </div>
+              <div>
+                <div class="font-display text-2xl">99.99%</div>
+                <div class="text-[10px] opacity-40 uppercase">Uptime</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-dashed border border-black/10 h-[250px] flex items-center justify-center font-mono text-[10px] opacity-30">
+            AD — 300 × 250
+          </div>
+        </aside>
+      </section>
+
+      <!-- PRINCIPLES SECTION -->
+      <section class="py-20 border-t border-black/5">
+        <div class="grid md:grid-cols-12 gap-8 items-end mb-12">
+          <h2 class="md:col-span-7 font-display text-5xl md:text-7xl leading-[0.95]">
+            Built like a <span class="italic-serif text-ember">private letter,</span> not a broadcast.[cite: 2]
+          </h2>
+          <p class="md:col-span-5 opacity-60">
+            Minimum surface, maximum control. Six principles guide every design decision.[cite: 2]
+          </p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-px bg-black/5 border border-black/5 rounded-3xl overflow-hidden">
+          <div class="bg-white p-10">
+            <i data-lucide="lock" class="text-ember mb-6"></i>
+            <h3 class="font-display text-2xl mb-2">Encrypted by default</h3>
+            <p class="text-sm opacity-60">AES-256 in transit and at rest. Keys derived per drop.[cite: 2]</p>
+          </div>
+          <div class="bg-white p-10">
+            <i data-lucide="clock" class="text-ember mb-6"></i>
+            <h3 class="font-display text-2xl mb-2">Self-expiring</h3>
+            <p class="text-sm opacity-60">Drops self-destruct on schedule or first read.[cite: 2]</p>
+          </div>
+          <div class="bg-white p-10">
+            <i data-lucide="eye-off" class="text-ember mb-6"></i>
+            <h3 class="font-display text-2xl mb-2">No accounts</h3>
+            <p class="text-sm opacity-60">No email, no password, no profile. Anonymous by design.[cite: 2]</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="mt-20 py-12 border-t border-black/5 bg-white/50 text-center">
+      <div class="font-display text-2xl mb-2">vraxis</div>
+      <div class="font-mono text-[10px] opacity-40 uppercase tracking-widest">
+        Operating from Potchefstroom · v1.0.4[cite: 2]
+      </div>
+    </footer>
+
+     <!-- FLOATING NAVIGATION BAR -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-nav">
+    <nav class="nav-glass flex items-center gap-1 p-1.5 rounded-full">
+        
+        <!-- Main Actions -->
+        <a href="/" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full bg-black text-white">
+            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold">Drop</span>
+        </a>
+
+        <a href="/retrieve" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="download" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Retrieve</span>
+        </a>
+
+        <a href="/activity" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Activity</span>
+        </a>
+
+        <a href="/journal" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Journal</span>
+        </a>
+
+        <!-- Legal/Info Flyout -->
+        <div class="relative legal-trigger">
+            <button class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+                <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">More</span>
+            </button>
+            
+            <!-- Hidden Legal Menu (Appears on Hover) -->
+            <div class="legal-menu absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-48 bg-white border border-black/5 rounded-2xl p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none transition-all duration-300">
+                <a href="/about" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">About Us</a>
+                <a href="/privacy" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Privacy Policy</a>
+                <a href="/terms" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Terms & Con</a>
+                <div class="border-t border-black/5 my-1"></div>
+                <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
+            </div>
+        </div>
+
+    </nav>
+    </div>
+
+    <script>
+      lucide.createIcons();
+
+      // Char counter logic
+      const textarea = document.getElementById("payload");
+      const count = document.getElementById("char-count");
+      textarea.addEventListener("input", () => {
+        count.innerText = `${textarea.value.length} chars`;
+      });
+    </script>
+</body>
+</html>

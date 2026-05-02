@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity — VRAXIS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper: oklch(0.975 0.012 80);
+            --ink: oklch(0.16 0.01 60);
+            --ember: oklch(0.62 0.22 27);
+            --border: oklch(0.16 0.01 60 / 0.1);
+        }
+        body { background-color: var(--paper); color: var(--ink); }
+        .font-display { font-family: 'Instrument Serif', serif; }
+        .font-mono { font-family: 'Geist Mono', monospace; }
+        .surface { background: white; border: 1px solid var(--border); border-radius: 1.5rem; }
+        
+        /* Monospace Table Styling */
+        .log-row { border-bottom: 1px solid var(--border); transition: background 0.2s; }
+        .log-row:hover { background: rgba(0,0,0,0.02); }
+        
+        @keyframes pulse-status {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .status-pulse { animation: pulse-status 2s infinite; }
+    </style>
+</head>
+<body class="selection:bg-[var(--ember)] selection:text-white">
+
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 py-8 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-[var(--ember)] rounded-full"></div>
+            <!-- Inside your Drops Today card -->
+<div class="font-display text-7xl md:text-8xl leading-none">
+    {{ "{:,}".format(count) }}
+</div>
+        <div class="hidden md:flex gap-8 text-sm font-medium opacity-60">
+            <a href="/">Drop</a>
+            <a href="/retrieve">Retrieve</a>
+            <a href="/activity" class="opacity-100">Activity</a>
+            <a href="/journal">Journal</a>
+            <a href="/about">About</a>
+        </div>
+        <button class="text-sm font-mono uppercase tracking-tighter" onclick="location.href='/'">New drop ↗</button>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 lg:px-10 pt-16 md:pt-24 pb-24">
+        <header class="mb-16">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 border border-black/5 font-mono text-[10px] uppercase tracking-widest opacity-60">System Status</span>
+            <h1 class="mt-6 font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.85] tracking-tight">
+                Live across the<br/><span class="italic-serif text-[var(--ember)]">network.</span>
+            </h1>
+        </header>
+
+        <!-- NETWORK METRICS GRID -->
+        <div class="grid md:grid-cols-4 gap-6 mb-12">
+            <div class="surface p-8">
+                <div class="font-mono text-[10px] uppercase tracking-widest opacity-40">Drops Today</div>
+                <div class="mt-4 font-display text-5xl">12,481</div>
+            </div>
+            <div class="surface p-8">
+                <div class="font-mono text-[10px] uppercase tracking-widest opacity-40">Avg Latency</div>
+                <div class="mt-4 font-display text-5xl">38 ms</div>
+            </div>
+            <div class="surface p-8">
+                <div class="font-mono text-[10px] uppercase tracking-widest opacity-40">Active Nodes</div>
+                <div class="mt-4 font-display text-5xl">7/7</div>
+            </div>
+            <div class="surface p-8">
+                <div class="font-mono text-[10px] uppercase tracking-widest opacity-40">Uptime</div>
+                <div class="mt-4 font-display text-5xl">99.99%</div>
+            </div>
+        </div>
+
+        <!-- LIVE TAIL SECTION -->
+        <section class="surface overflow-hidden">
+            <div class="px-8 py-5 border-b border-black/5 flex items-center justify-between bg-black/5">
+                <div class="flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-[var(--ember)] status-pulse"></span>
+                    <span class="font-mono text-[10px] uppercase tracking-widest opacity-60">Live Tail</span>
+                </div>
+                <span class="font-mono text-[10px] opacity-40">Streaming enabled</span>
+            </div>
+
+            <div class="p-0">
+                <table class="w-full text-left font-mono text-[11px]">
+                    <thead class="bg-black/5 opacity-40 border-b border-black/5">
+                        <tr>
+                            <th class="px-8 py-3 font-normal">TIMESTAMP</th>
+                            <th class="px-8 py-3 font-normal">NODE</th>
+                            <th class="px-8 py-3 font-normal">EVENT</th>
+                        </tr>
+                    </thead>
+                    <tbody id="log-body">
+                        <tr class="log-row">
+                            <td class="px-8 py-4 opacity-40">15:04:21</td>
+                            <td class="px-8 py-4">ZA-01 (Potch)</td>
+                            <td class="px-8 py-4 text-[var(--ember)]">Released — expires 24h</td>
+                        </tr>
+                        <tr class="log-row">
+                            <td class="px-8 py-4 opacity-40">15:03:58</td>
+                            <td class="px-8 py-4">ZA-01 (Potch)</td>
+                            <td class="px-8 py-4">Retrieved & destroyed</td>
+                        </tr>
+                        <tr class="log-row">
+                            <td class="px-8 py-4 opacity-40">15:03:11</td>
+                            <td class="px-8 py-4">DE-01 (Frankfurt)</td>
+                            <td class="px-8 py-4 text-orange-500">Rate limit approached</td>
+                        </tr>
+                        <tr class="log-row">
+                            <td class="px-8 py-4 opacity-40">15:02:44</td>
+                            <td class="px-8 py-4">ZA-02 (Cape Town)</td>
+                            <td class="px-8 py-4">Heartbeat 41ms</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- DISCREET AD SLOT -->
+        <div class="mt-20 h-[250px] border border-dashed border-black/10 flex items-center justify-center font-mono text-[10px] opacity-30 uppercase tracking-[0.2em]">
+            Sponsored — 300 × 250
+        </div>
+    </main>
+
+    <footer class="py-12 border-t border-black/5 text-center opacity-40 font-mono text-[10px] uppercase tracking-widest">
+        Operating from Potchefstroom · v1.0.4 · ● All systems nominal
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Simple mock streaming for the "App Feel"
+        const logBody = document.getElementById('log-body');
+        const nodes = ["ZA-01 (Potch)", "ZA-02 (CT)", "DE-01 (FRA)", "NG-01 (Lagos)"];
+        const events = ["Released — expires 1h", "Retrieved & destroyed", "Heartbeat 38ms", "Encryption keys rotated"];
+
+        setInterval(() => {
+            const now = new Date().toTimeString().split(' ')[0];
+            const node = nodes[Math.floor(Math.random() * nodes.length)];
+            const event = events[Math.floor(Math.random() * events.length)];
+            
+            const newRow = document.createElement('tr');
+            newRow.className = 'log-row opacity-0 translate-y-2 transition-all duration-500';
+            newRow.innerHTML = `
+                <td class="px-8 py-4 opacity-40">${now}</td>
+                <td class="px-8 py-4">${node}</td>
+                <td class="px-8 py-4">${event}</td>
+            `;
+            
+            logBody.insertBefore(newRow, logBody.firstChild);
+            setTimeout(() => {
+                newRow.classList.remove('opacity-0', 'translate-y-2');
+            }, 10);
+
+            if (logBody.children.length > 10) {
+                logBody.removeChild(logBody.lastChild);
+            }
+        }, 5000);
+    </script>
+
+     <!-- FLOATING NAVIGATION BAR -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-nav">
+    <nav class="nav-glass flex items-center gap-1 p-1.5 rounded-full">
+        
+        <!-- Main Actions -->
+        <a href="/" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full bg-black text-white">
+            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold">Drop</span>
+        </a>
+
+        <a href="/retrieve" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="download" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Retrieve</span>
+        </a>
+
+        <a href="/activity" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Activity</span>
+        </a>
+
+        <a href="/journal" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Journal</span>
+        </a>
+
+        <!-- Legal/Info Flyout -->
+        <div class="relative legal-trigger">
+            <button class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+                <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">More</span>
+            </button>
+            
+            <!-- Hidden Legal Menu (Appears on Hover) -->
+            <div class="legal-menu absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-48 bg-white border border-black/5 rounded-2xl p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none transition-all duration-300">
+                <a href="/about" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">About Us</a>
+                <a href="/privacy" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Privacy Policy</a>
+                <a href="/terms" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Terms & Con</a>
+                <div class="border-t border-black/5 my-1"></div>
+                <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
+            </div>
+        </div>
+
+    </nav>
+</div>
+
+<!-- Lucide Icon Initialization -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+
+    // Logic to highlight active link
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('.nav-item').forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('bg-black', 'text-white');
+            link.classList.remove('text-black/40', 'hover:bg-black/5');
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin — VRAXIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper: oklch(0.975 0.012 80);
+            --ink: oklch(0.16 0.01 60);
+            --ember: oklch(0.62 0.22 27);
+            --border: oklch(0.16 0.01 60 / 0.1);
+        }
+        body { background-color: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; }
+        .font-display { font-family: 'Instrument Serif', serif; }
+        .font-mono { font-family: 'Geist Mono', monospace; }
+        .italic-serif { font-family: 'Instrument Serif', serif; font-style: italic; }
+        .nav-glass { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); border: 1px solid rgba(0, 0, 0, 0.08); }
+        
+        @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade { animation: fade-in 1s ease-out forwards; }
+    </style>
+</head>
+<body class="selection:bg-[var(--ember)] selection:text-white pb-32">
+
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 py-8 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-[var(--ember)] rounded-full"></div>
+            <span class="font-display text-2xl">vraxisdrop</span>
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-medium opacity-60">
+            <a href="/">Drop</a>
+            <a href="/retrieve">Retrieve</a>
+            <a href="/activity">Activity</a>
+            <a href="/journal">Journal</a>
+            <a href="/about" class="opacity-100">About</a>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-6 pt-20 md:pt-32">
+        <header class="mb-20 animate-fade">
+            <span class="font-mono text-[10px] uppercase tracking-[0.3em] opacity-40">The Origin Note</span>
+            <h1 class="mt-6 font-display text-7xl md:text-8xl leading-[0.85] tracking-tight">
+                A quiet move <br/>against the <span class="italic-serif text-[var(--ember)]">noise.</span>
+            </h1>
+        </header>
+
+        <article class="space-y-12 text-lg md:text-xl leading-relaxed opacity-80 animate-fade" style="animation-delay: 0.2s">
+            <p>
+                Vraxis wasn't built in a boardroom. It was built in a dorm room in <span class="text-[var(--ink)] font-semibold">Potchefstroom</span>, born from a simple realization: the internet has become a series of gates.
+            </p>
+            
+            <p>
+                Every time you want to share a simple thought, a password, or a draft, you are asked to "Sign In." You are asked to leave a trail. You are asked to trust a database that never forgets.
+            </p>
+
+            <div class="py-8 border-y border-black/5">
+                <blockquote class="font-display text-3xl md:text-4xl italic text-[var(--ember)] leading-tight">
+                    "I wanted to build a way to send anything, and leave absolutely nothing behind."
+                </blockquote>
+            </div>
+
+            <p>
+                As an IT student, I saw how data was being treated—as an asset to be hoarded. Vraxis treats data as <span class="italic-serif underline decoration-[var(--ember)] underline-offset-4">Ember</span>. It burns bright for a moment, serves its purpose, and then vanishes. No accounts. No tracking. No logs.
+            </p>
+
+            <p>
+                What you see here is a private beta. A quiet channel between devices. It is a one-man attempt to return to a web that was fast, anonymous, and ephemeral.
+            </p>
+        </article>
+
+        <!-- THE SPECS SECTION -->
+        <section class="mt-24 grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-black/5 pt-12 animate-fade" style="animation-delay: 0.4s">
+            <div>
+                <h3 class="font-mono text-[10px] uppercase tracking-widest opacity-40 mb-4">Node Location</h3>
+                <p class="font-display text-3xl">South Africa, ZA-01</p>
+                <p class="text-sm mt-2 opacity-50">Primary operational hub located in Potchefstroom. Fully self-hosted architecture.</p>
+            </div>
+            <div>
+                <h3 class="font-mono text-[10px] uppercase tracking-widest opacity-40 mb-4">The Mission</h3>
+                <p class="font-display text-3xl">Zero Persistence</p>
+                <p class="text-sm mt-2 opacity-50">Every drop is purged immediately upon retrieval or expiry. We keep no history because we don't want it.</p>
+            </div>
+        </section>
+
+        <div class="mt-32 p-10 bg-white rounded-[2rem] border border-black/5 text-center animate-fade" style="animation-delay: 0.6s">
+            <p class="font-mono text-[10px] uppercase tracking-[0.2em] opacity-40 mb-4">Operational Status</p>
+            <div class="flex items-center justify-center gap-3 mb-6">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span class="font-display text-2xl">Network Nominal</span>
+            </div>
+            <a href="/" class="inline-flex items-center gap-2 px-8 py-4 bg-black text-white rounded-full text-sm font-medium hover:bg-[var(--ember)] transition-all">
+                Release your first drop <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- FLOATING NAVIGATION BAR -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-nav">
+    <nav class="nav-glass flex items-center gap-1 p-1.5 rounded-full">
+        
+        <!-- Main Actions -->
+        <a href="/" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full bg-black text-white">
+            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold">Drop</span>
+        </a>
+
+        <a href="/retrieve" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="download" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Retrieve</span>
+        </a>
+
+        <a href="/activity" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Activity</span>
+        </a>
+
+        <a href="/journal" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Journal</span>
+        </a>
+
+        <!-- Legal/Info Flyout -->
+        <div class="relative legal-trigger">
+            <button class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+                <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">More</span>
+            </button>
+            
+            <!-- Hidden Legal Menu (Appears on Hover) -->
+            <div class="legal-menu absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-48 bg-white border border-black/5 rounded-2xl p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none transition-all duration-300">
+                <a href="/about" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">About Us</a>
+                <a href="/privacy" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Privacy Policy</a>
+                <a href="/terms" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Terms & Con</a>
+                <div class="border-t border-black/5 my-1"></div>
+                <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
+            </div>
+        </div>
+
+    </nav>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

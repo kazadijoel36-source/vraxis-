@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Case for the Accountless Web — VRAXIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Geist+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper: oklch(0.975 0.012 80);
+            --ink: oklch(0.16 0.01 60);
+            --ember: oklch(0.62 0.22 27);
+            --border: oklch(0.16 0.01 60 / 0.1);
+        }
+        body { background-color: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; line-height: 1.6; }
+        .font-display { font-family: 'Instrument Serif', serif; }
+        .italic-serif { font-family: 'Instrument Serif', serif; font-style: italic; }
+        .prose p { margin-bottom: 1.5rem; opacity: 0.9; font-size: 1.125rem; }
+        .prose h2 { font-family: 'Instrument Serif', serif; font-size: 2.5rem; margin-top: 3rem; margin-bottom: 1rem; line-height: 1.1; }
+        .nav-glass { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); border: 1px solid rgba(0, 0, 0, 0.08); }
+    </style>
+</head>
+<body class="selection:bg-[var(--ember)] selection:text-white pb-32">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 py-8 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-[var(--ember)] rounded-full"></div>
+            <span class="font-display text-2xl">vraxisdrop</span>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-6 pt-20">
+        <header class="mb-16">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="font-mono text-[10px] uppercase tracking-widest px-2 py-1 bg-black/5 rounded">Field Note 01</span>
+                <span class="font-mono text-[10px] opacity-40 uppercase tracking-widest">May 2026</span>
+            </div>
+            <h1 class="font-display text-6xl md:text-8xl leading-[0.9] tracking-tight">
+                The Case for the <br/><span class="italic-serif text-[var(--ember)]">Accountless</span> Web.
+            </h1>
+        </header>
+
+        <article class="prose">
+            <p>
+                In the modern digital landscape, the "User Account" has become the toll we pay for basic utility.[cite: 1] We are told that profiles, passwords, and persisted histories are for our benefit—providing "personalization" and "seamless sync." But VRAXIS was built on a different premise: <strong>Every piece of data you store is a liability.</strong>[cite: 1]
+            </p>
+
+            <h2>The Friction of Persistence</h2>
+            <p>
+                According to recent cybersecurity benchmarks, the average internet user maintains over 100 unique accounts.[cite: 1] This "identity bloat" has created a massive surface area for data breaches.[cite: 1] When a service requires an account, they aren't just giving you a place to store data; they are creating a permanent link between your identity and your digital actions.[cite: 1]
+            </p>
+            
+            <p>
+                VRAXIS operates on a <strong>Zero-Persistence Architecture</strong>.[cite: 1] By removing the account layer, we achieve three critical things:
+            </p>
+            <ul class="list-disc pl-6 mb-6 space-y-2 opacity-80">
+                <li><strong>Instant Utility:</strong> You move from intent to action in under 3 seconds.[cite: 1]</li>
+                <li><strong>Anonymity by Default:</strong> We don't store your IP or device fingerprint.[cite: 1]</li>
+                <li><strong>The Purge:</strong> Once a drop is retrieved or expires, it is physically deleted from the ZA-01 node.[cite: 1]</li>
+            </ul>
+
+            <h2>The Paradox of Privacy</h2>
+            <p>
+                Statistical data shows that 81% of data breaches involve compromised credentials.[cite: 1] By requiring a login, most "secure" apps actually create the very vulnerability that leads to data theft.[cite: 1] VRAXIS bypasses this paradox entirely. We use 4-digit temporary keys—short-lived access tokens that burn out the moment they are used.[cite: 1]
+            </p>
+
+            <p class="mt-12 opacity-60 italic">— Built in Potchefstroom. v1.0.4</p>
+        </article>
+    </main>
+
+     <!-- FLOATING NAVIGATION BAR -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-nav">
+    <nav class="nav-glass flex items-center gap-1 p-1.5 rounded-full">
+        
+        <!-- Main Actions -->
+        <a href="/" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full bg-black text-white">
+            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold">Drop</span>
+        </a>
+
+        <a href="/retrieve" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="download" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Retrieve</span>
+        </a>
+
+        <a href="/activity" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Activity</span>
+        </a>
+
+        <a href="/journal" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Journal</span>
+        </a>
+
+        <!-- Legal/Info Flyout -->
+        <div class="relative legal-trigger">
+            <button class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+                <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+                <span class="text-[10px] font-medium">More</span>
+            </button>
+            
+            <!-- Hidden Legal Menu (Appears on Hover) -->
+            <div class="legal-menu absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-48 bg-white border border-black/5 rounded-2xl p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none transition-all duration-300">
+                <a href="/about" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">About Us</a>
+                <a href="/privacy" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Privacy Policy</a>
+                <a href="/terms" class="block px-4 py-2 text-xs hover:bg-black/5 rounded-lg">Terms & Con</a>
+                <div class="border-t border-black/5 my-1"></div>
+                <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
+            </div>
+        </div>
+
+    </nav>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
