@@ -27,10 +27,11 @@
             <img src="{{ url_for('static', filename='icons/drop.png') }}" alt="Drop">
             <span>Drop</span>
         </a>
-        <a href="{{ url_for('retrieve') }}" class="nav-item {{ 'active' if request.endpoint == 'retrieve' }}">
-            <img src="{{ url_for('static', filename='icons/retrieve.png') }}" alt="Retrieve">
-            <span>Retrieve</span>
-        </a>
+       <!-- Change 'retrieve' to 'retrieve_page' -->
+<a href="{{ url_for('retrieve_page') }}" class="nav-item {{ 'active' if request.endpoint == 'retrieve_page' }}">
+    <img src="{{ url_for('static', filename='icons/retrieve.png') }}" alt="Retrieve">
+    <span>Retrieve</span>
+</a>
         <a href="{{ url_for('activity') }}" class="nav-item {{ 'active' if request.endpoint == 'activity' }}">
             <img src="{{ url_for('static', filename='icons/activity.png') }}" alt="Activity">
             <span>Activity</span>
