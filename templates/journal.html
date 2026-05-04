@@ -157,6 +157,11 @@
             <span class="text-[10px] font-medium">Journal</span>
         </a>
 
+        <a href="{{ url_for('journal') }}" class="nav-item active">
+    <img src="{{ url_for('static', filename='icons/journal.png') }}" alt="Journal">
+    <span>Journal</span>
+</a>
+
         <!-- Legal/Info Flyout -->
         <div class="relative legal-trigger">
             <button class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
@@ -172,6 +177,27 @@
                 <div class="border-t border-black/5 my-1"></div>
                 <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
             </div>
+            {% extends "base.html" %}
+{% block title %}Send Anything{% endblock %}
+
+{% extends "base.html" %}
+{% block title %}Journal{% endblock %}
+
+{% block content %}
+<section class="journal-hero">
+    <p class="subtitle">FIELD NOTES</p>
+    <h1>Privacy is a quiet decision.</h1>
+    <p>Long-form essays on why we built an accountless empire from the ZA-01 node.</p>
+</section>
+
+<div class="essay-list">
+    <!-- This is where your 10 essays will live by Tuesday -->
+    <article class="essay-preview">
+        <h2>The Case for the Accountless Web</h2>
+        <a href="{{ url_for('about') }}">Read Manifesto →</a>
+    </article>
+</div>
+{% endblock %}
         </div>
 
     </nav>

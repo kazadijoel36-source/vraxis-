@@ -102,6 +102,10 @@
 <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-nav">
     <nav class="nav-glass flex items-center gap-1 p-1.5 rounded-full">
         
+        <a href="{{ url_for('about') }}" class="nav-item active">
+    <img src="{{ url_for('static', filename='icons/drop.png') }}" alt="Drop">
+    <span>Drop</span>
+</a>
         <!-- Main Actions -->
         <a href="/" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full bg-black text-white">
             <i data-lucide="plus-circle" class="w-5 h-5"></i>
@@ -139,6 +143,31 @@
                 <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
             </div>
         </div>
+        {% extends "base.html" %}
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Send anything. <br>Leave nothing.</h1>
+    <p>Vraxis Drop is a quiet, ephemeral channel between your devices and the people you trust.</p>
+</section>
+
+<div class="drop-zone">
+    <textarea placeholder="Type, paste, dictate..."></textarea>
+    <button class="action-btn">Create Drop</button>
+</div>
+{% endblock %}
+
+{% extends "base.html" %}
+{% block title %}Privacy Policy{% endblock %}
+
+{% block content %}
+<article class="legal-page">
+    <h1>Privacy Policy</h1>
+    <p>Last updated: May 2026</p>
+    <!-- We will fill this content today for your Adsense application -->
+</article>
+{% endblock %}
 
     </nav>
 

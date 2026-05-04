@@ -169,6 +169,10 @@
 <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-nav">
     <nav class="nav-glass flex items-center gap-1 p-1.5 rounded-full">
         
+        <a href="{{ url_for('about') }}" class="nav-item active">
+    <img src="{{ url_for('static', filename='icons/drop.png') }}" alt="Drop">
+    <span>Drop</span>
+</a>
         <!-- Main Actions -->
         <a href="/" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full bg-black text-white">
             <i data-lucide="plus-circle" class="w-5 h-5"></i>
@@ -209,6 +213,26 @@
 
     </nav>
 </div>
+{% extends "base.html" %}
+{% block title %}Network Activity{% endblock %}
+
+{% block content %}
+<section class="status-header">
+    <div class="status-dot"></div>
+    <h1>Live across the network.</h1>
+</section>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>DROPS TODAY</h3>
+        <p>12,481</p>
+    </div>
+    <div class="stat-card">
+        <h3>AVG LATENCY</h3>
+        <p>38 ms</p>
+    </div>
+</div>
+{% endblock %}
 
 <!-- Lucide Icon Initialization -->
 <script src="https://unpkg.com/lucide@latest"></script>
