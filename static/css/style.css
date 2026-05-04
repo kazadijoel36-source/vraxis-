@@ -111,12 +111,18 @@ body {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
+/* Default state: Dimmed and Greyscale */
 .nav-item {
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.5;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
 }
 
-.nav-item:active {
-    transform: scale(0.92);
+/* Active state: Full Color and Solid */
+.nav-item.active {
+    opacity: 1;
+    filter: grayscale(0%);
+    border-bottom: 2px solid #e63946; /* Optional: Adds a small 'Ember' accent line */
 }
 
 /* Tooltip style for Legal links */
@@ -182,4 +188,63 @@ body {
   aside {
     display: none;
   }
+}
+
+.more-menu {
+    position: absolute;
+    bottom: 70px; /* Moves it above the nav bar */
+    right: 0;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 8px;
+    width: 180px;
+    display: none; /* Controlled by JS */
+    z-index: 1000;
+}
+
+.more-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.more-menu a:hover {
+    background: #f5f5f5;
+}
+.new-drop-btn {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 16px; /* Increases the thumb-tap area */
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.new-drop-btn::before {
+    content: '+'; /* Simple icon addition without a new image */
+    font-size: 16px;
+}
+
+/* Target your main content wrapper */
+main, .content-wrapper {
+    padding-bottom: 120px; /* Gives extra breathing room above the 70px nav */
+}
+
+.footer-info {
+    text-align: center;
+    font-family: monospace;
+    font-size: 10px;
+    color: #888;
+    margin-top: 40px;
 }

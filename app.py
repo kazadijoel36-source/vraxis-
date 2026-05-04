@@ -19,6 +19,7 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
+
 @app.route('/drop', methods=['POST'])
 def drop_matter():
     content = request.form.get('content')
