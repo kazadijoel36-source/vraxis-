@@ -177,25 +177,22 @@
                 <div class="border-t border-black/5 my-1"></div>
                 <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
             </div>
-            {% extends "base.html" %}
-{% block title %}Send Anything{% endblock %}
+            
 
 {% extends "base.html" %}
+
 {% block title %}Journal{% endblock %}
 
 {% block content %}
-<section class="journal-hero">
-    <p class="subtitle">FIELD NOTES</p>
-    <h1>Privacy is a quiet decision.</h1>
-    <p>Long-form essays on why we built an accountless empire from the ZA-01 node.</p>
+...
+<section class="hero">
+    <h1>Send anything. <br>Leave nothing.</h1>
+    <p>Vraxis Drop is a quiet, ephemeral channel between your devices and the people you trust.</p>
 </section>
 
-<div class="essay-list">
-    <!-- This is where your 10 essays will live by Tuesday -->
-    <article class="essay-preview">
-        <h2>The Case for the Accountless Web</h2>
-        <a href="{{ url_for('about') }}">Read Manifesto →</a>
-    </article>
+<div class="drop-zone">
+    <textarea placeholder="Type, paste, dictate..."></textarea>
+    <button class="action-btn">Create Drop</button>
 </div>
 {% endblock %}
         </div>
