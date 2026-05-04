@@ -69,23 +69,6 @@
                 <div class="border-t border-black/5 my-1"></div>
                 <div class="px-4 py-2 text-[9px] uppercase tracking-widest opacity-30 font-mono">Potchefstroom Node</div>
             </div>
-            {% extends "base.html" %}
-{% block title %}Drop Success{% endblock %}
-
-{% block content %}
-<section class="success-screen">
-    <h1>Vanish initialized.</h1>
-    <p>Your matter is live on the network for the next 24 hours.</p>
-    
-    <div class="qr-container">
-        <!-- The qrcode module will inject the image here -->
-        <img src="{{ qr_url }}" alt="QR Code">
-        <h2>{{ drop_code }}</h2>
-    </div>
-    
-    <button class="action-btn" onclick="copyLink()">Copy Secret Link</button>
-</section>
-{% endblock %}
 
 
         </div>
