@@ -19,7 +19,6 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
-
 @app.route('/drop', methods=['POST'])
 def drop_matter():
     content = request.form.get('content')
@@ -53,8 +52,9 @@ def generate_qr(code):
     buf.seek(0)
     return send_file(buf, mimetype='image/png')
 
+# Change 'def retrieve_page():' to 'def retrieve():'
 @app.route('/retrieve')
-def retrieve_page():
+def retrieve():
     return render_template('retrieve.html')
 
 @app.route('/api/pickup/<code>')

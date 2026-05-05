@@ -96,9 +96,10 @@
 <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-nav">
     <nav class="nav-glass flex items-center gap-1 p-1.5 rounded-full">
         
-        <a href="{{ url_for('retrieve') }}" class="nav-item active">
-    <img src="{{ url_for('static', filename='icons/drop.png') }}" alt="Drop">
-    <span>Drop</span>
+       <!-- USE THIS INSTEAD -->
+<a href="{{ url_for('index') }}" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full hover:bg-black/5 text-black/40 hover:text-black">
+    <i data-lucide="plus-circle" class="w-5 h-5"></i>
+    <span class="text-[10px] font-medium">Drop</span>
 </a>
         <!-- Main Actions -->
         <a href="/" class="nav-item flex flex-col items-center gap-1 px-5 py-2 rounded-full bg-black text-white">
