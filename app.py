@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, send_file
 from models import db, Drop
 from datetime import datetime, timedelta
+from config import Config
 import qrcode
 import io
 
 app = Flask(__name__)
-import os
+app.config.from_object(Config) # <--- This replaces the hardcoded lines
+
+db.init_app(app)
 
 # Use an environment variable for the database URL if Railway provides one, 
 # otherwise default to your local sqlite file.
@@ -22,10 +25,15 @@ def index():
 @app.route('/drop', methods=['POST'])
 def drop_matter():
     content = request.form.get('content')
-    expiry_choice = request.form.get('expiry', '24h') 
     
-    expiry_map = {'1h': 1, '24h': 24, '7d': 168}
-    hours = expiry_map.get(expiry_choice, 24)
+    # Instead of hardcoding 24, we pull it from the Config
+    # If the user didn't pick a choice, we use the default from config.py
+    hours = app.config.get('DEFAULT_EXPIRY_HOURS') 
+    
+    new_code = Drop.generate_code()
+    expiration = datetime.utcnow() + timedelta(hours=hours)
+    
+    # ... rest of your code ...
     
     new_code = Drop.generate_code()
     expiration = datetime.utcnow() + timedelta(hours=hours)
