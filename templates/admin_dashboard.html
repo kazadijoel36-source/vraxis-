@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<section class="admin-container p-10">
+    <div class="flex justify-between items-center mb-8">
+        <h1>Node Management</h1>
+        <a href="{{ url_for('admin_logout') }}" class="text-red-500 font-bold">Logout</a>
+    </div>
+
+    <div class="surface overflow-hidden">
+        <table class="w-full text-left">
+            <thead class="bg-black text-white">
+                <tr>
+                    <th class="p-4">Code</th>
+                    <th class="p-4">Content Preview</th>
+                    <th class="p-4">Expires At</th>
+                    <th class="p-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for drop in drops %}
+                <tr class="border-b border-black/5">
+                    <td class="p-4 font-mono font-bold">{{ drop.code }}</td>
+                    <td class="p-4 text-sm">{{ drop.content[:30] }}...</td>
+                    <td class="p-4 text-xs">{{ drop.expires_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td class="p-4">
+                        <a href="{{ url_for('delete_drop', drop_id=drop.id) }}" class="text-red-600 hover:underline">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

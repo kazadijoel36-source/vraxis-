@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify, s
 from models import db, Drop
 from datetime import datetime, timedelta
 from config import Config
+from flask import session, flash
 import qrcode
 import io
 
@@ -116,3 +117,45 @@ if __name__ == '__main__':
         db.create_all()
     app.run(debug=True)
 
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        
+        if username == app.config['ADMIN_USERNAME'] and password == app.config['ADMIN_PASSWORD']:
+            session['admin_logged_in'] = True
+            return redirect(url_for('admin_dashboard'))
+        else:
+            flash('Invalid credentials')
+    
+    return render_template('admin_login.html')
+
+# 2. The Dashboard (The List of Drops)
+@app.route('/admin')
+def admin_dashboard():
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin_login'))
+    
+    # Query all active drops from the database
+    all_drops = Drop.query.order_by(Drop.expires_at.desc()).all()
+    return render_template('admin_dashboard.html', drops=all_drops)
+
+# 3. Logout
+@app.route('/admin/logout')
+def admin_logout():
+    session.pop('admin_logged_in', None)
+    return redirect(url_for('admin_login'))
+
+# 4. Action: Delete a Drop (Reviewers love "Management" features)
+@app.route('/admin/delete/<int:drop_id>')
+def delete_drop(drop_id):
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin_login'))
+    
+    drop = Drop.query.get(drop_id)
+    if drop:
+        db.session.delete(drop)
+        db.session.commit()
+        flash(f'Drop {drop.code} deleted successfully.')
+    return redirect(url_for('admin_dashboard'))

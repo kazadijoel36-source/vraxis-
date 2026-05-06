@@ -17,3 +17,7 @@ class Config:
     # 4. Global Branding
     NODE_NAME = "ZA-01 POTCHEFSTROOM NODE"
     VERSION = "1.0.4"
+
+    # 5. Admin Credentials
+    ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME') or 'admin'
+    ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD') or 'potch2026'  # Buyer will change this
